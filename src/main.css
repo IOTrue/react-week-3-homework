@@ -1,0 +1,80 @@
+.f-bold{
+    font-weight: bold;
+}
+.linkTodoItem{
+    display: block;
+    height: 100%;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+}
+.hihome{
+    width: 30px;
+    height: 30px;
+    color: #fa9370;
+}
+.hihome:hover{
+    color: #f44408;
+    transform: scale(1.3);
+    transition: 0.3s;
+}
+.linkContent{
+    padding: 40px 20px;
+    border: 1px solid #fa9370;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #f44408;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.linkContent:hover{
+    color: seagreen;
+    border-color: seagreen;
+    transform: scale(1.01);
+    transition: 0.3s;
+}
+.linkCancle{
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+}
+.prevIcon{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.prevIcon:hover{
+    color: #f44408;
+}
+.buttonListTrash{
+    position: absolute;
+    right: 20px;
+    top: 24%;
+}
+.iconListTrash{
+    width: 20px;
+    height: 20px;
+    color: #ffac40;
+}
+.buttonListTrash:hover .iconListTrash{
+    color: red;
+}
+
+/*디테일*/
+.todoDetailDataSpan{
+    display: block;
+    margin: 50px 0;
+}
+.iconPrevList{
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+.iconPrevList:hover{
+    color: #f44408;
+}
