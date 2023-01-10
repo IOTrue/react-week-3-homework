@@ -20,7 +20,7 @@ function Home() {
 
 
 const StContentsNav = styled.nav`
-    margin-top: 30px;
+    margin: 30px 0 100px;
     padding: 40px;
 `
 const StH2 = styled.h2`

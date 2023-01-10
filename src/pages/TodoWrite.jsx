@@ -1,29 +1,43 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import styled from "styled-components";
 import ButtonDefault from '../components/ButtonDefault';
+import useInput from '../hooks/useInput';
 import { useNavigate } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import {addTodoList} from '../redux/modules/todosSlice'
 
 
 function TodoWrite() {
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [auth, onChangeAuthHandler] = useInput('')
+    const [title, onChangeTitleHandler] = useInput('')
+    const [content, onChangeContentHandler] = useInput('')
 
-    const onSubmitHandler = ()=>{
-        alert('클릭')
+    const navigate = useNavigate()
+    const onSubmitTodoHandler = (e)=>{
+        e.preventDefault()
+        const newTodoItem = {
+            auth,
+            title,
+            content
+        }
+        dispatch(addTodoList(newTodoItem))
     }
+   
     const onClickNavigateHome = ()=>{
         navigate('/')
     }
 
   return (
     <StPositionBox>
-        <StTodoWriteBox onSubmit={onSubmitHandler}>
+        <StTodoWriteBox onSubmit={onSubmitTodoHandler}>
             <StLabelInput for="todoInputAuth">작성자</StLabelInput>
-            <StTodoInput type="text" id="todoInputAuth" placeholder="이름을 입력하세요 (5자 이내)" required></StTodoInput>
+            <StTodoInput onChange={onChangeAuthHandler} value={auth} type="text" id="todoInputAuth" placeholder="이름을 입력하세요 (5자 이내)" required></StTodoInput>
             <StLabelInput for="todoInputTitle">제목</StLabelInput>
-            <StTodoInput type="text" id="todoInputTitle" placeholder="제목을 입력하세요 (50자 이내)" required></StTodoInput>
+            <StTodoInput onChange={onChangeTitleHandler} value={title} type="text" id="todoInputTitle" placeholder="제목을 입력하세요 (50자 이내)" required></StTodoInput>
             <StLabelInput for="todoInputContent">내용</StLabelInput>
-            <StTodoTextarea id="todoInputContent" placeholder="내용을 입력하세요 (200자 이내)" required></StTodoTextarea>
+            <StTodoTextarea onChange={onChangeContentHandler} value={content} id="todoInputContent" placeholder="내용을 입력하세요 (200자 이내)" required></StTodoTextarea>
             <StDivCenter>
                 <ButtonDefault padding="12px 80px"
                 bgColor="#fa9370" hoverColor="#f44408" hoverFontColor="#fff"
@@ -42,7 +56,7 @@ const StPositionBox = styled.div`
     padding: 50px 40px 40px;
     width: 40%;
     min-width: 500px;
-    margin: 80px auto 0;
+    margin: 80px auto 100px;
 `
 const StTodoWriteBox = styled.form`
     

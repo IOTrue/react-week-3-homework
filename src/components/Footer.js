@@ -9,7 +9,7 @@ function Footer() {
 
 const TodoFooter = styled.footer`
     text-align: center;
-    margin-top: 200px;
+    margin-bottom: 20px;
 `
 
 export default Footer

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -8,55 +9,63 @@ import ButtonDefault from '../components/ButtonDefault';
 
 
 function TodoList() {
+
+  const todos = useSelector((state)=>state.todosSlice.todos)
+  console.log('투두 리스트 : ' , todos)
+
+  const TodoItem = ()=> {
+    
+  }
+
   return (
     <StTodoListBox>
       <StH2>2023 Todo List</StH2>
       <StTodoUl>
-      <StTodoItem> 
-        <Link to="/todoListDetail/1" className="linkTodoItem">
-          <StTodoListItemDiv>
-            <StTodoTitleSpan>제목</StTodoTitleSpan>
-            <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-          </StTodoListItemDiv>
-          <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-        </Link>
-      </StTodoItem>
-      <StTodoItem> 
-        <Link to="/todoListDetail/1" className="linkTodoItem">
-          <StTodoListItemDiv>
-            <StTodoTitleSpan>제목</StTodoTitleSpan>
-            <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-          </StTodoListItemDiv>
-          <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-        </Link>
-      </StTodoItem>
-      <StTodoItem> 
-        <Link to="/todoListDetail/1" className="linkTodoItem">
-          <StTodoListItemDiv>
-            <StTodoTitleSpan>제목</StTodoTitleSpan>
-            <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-          </StTodoListItemDiv>
-          <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-        </Link>
-      </StTodoItem>
-      <StTodoItem> 
-        <Link to="/todoListDetail/1" className="linkTodoItem">
-          <StTodoListItemDiv>
-            <StTodoTitleSpan>제목</StTodoTitleSpan>
-            <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-          </StTodoListItemDiv>
-          <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-        </Link>
-      </StTodoItem>
-      <StTodoItem> 
-        <Link to="/todoListDetail/1" className="linkTodoItem">
-          <StTodoListItemDiv>
-            <StTodoTitleSpan>제목</StTodoTitleSpan>
-            <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-          </StTodoListItemDiv>
-          <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-        </Link>
-      </StTodoItem>
+        <StTodoItem> 
+          <Link to="/todoListDetail/1" className="linkTodoItem">
+            <StTodoListItemDiv>
+              <StTodoTitleSpan>제목</StTodoTitleSpan>
+              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
+            </StTodoListItemDiv>
+            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+          </Link>
+        </StTodoItem>
+        <StTodoItem> 
+          <Link to="/todoListDetail/1" className="linkTodoItem">
+            <StTodoListItemDiv>
+              <StTodoTitleSpan>제목</StTodoTitleSpan>
+              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
+            </StTodoListItemDiv>
+            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+          </Link>
+        </StTodoItem>
+        <StTodoItem> 
+          <Link to="/todoListDetail/1" className="linkTodoItem">
+            <StTodoListItemDiv>
+              <StTodoTitleSpan>제목</StTodoTitleSpan>
+              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
+            </StTodoListItemDiv>
+            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+          </Link>
+        </StTodoItem>
+        <StTodoItem> 
+          <Link to="/todoListDetail/1" className="linkTodoItem">
+            <StTodoListItemDiv>
+              <StTodoTitleSpan>제목</StTodoTitleSpan>
+              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
+            </StTodoListItemDiv>
+            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+          </Link>
+        </StTodoItem>
+        <StTodoItem> 
+          <Link to="/todoListDetail/1" className="linkTodoItem">
+            <StTodoListItemDiv>
+              <StTodoTitleSpan>제목</StTodoTitleSpan>
+              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
+            </StTodoListItemDiv>
+            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+          </Link>
+        </StTodoItem>
       </StTodoUl>
     </StTodoListBox>
   )
@@ -69,6 +78,7 @@ const StTodoListItemDiv = styled.div`
 `
 const StTodoListBox = styled.div`
   padding: 70px 40px;
+  margin-bottom: 100px;
 `
 const StTodoTitleSpan = styled.span`
   font-weight: bold;

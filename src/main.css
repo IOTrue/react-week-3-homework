@@ -1,6 +1,9 @@
 .f-bold{
     font-weight: bold;
 }
+.p-relative{
+    position: relative;
+}
 .linkTodoItem{
     display: block;
     height: 100%;
@@ -76,5 +79,25 @@
     cursor: pointer;
 }
 .iconPrevList:hover{
+    color: #f44408;
+}
+/*댓글*/
+.commentBoxWrap.boxOn{
+    bottom: 0;
+    left: 0;
+}
+.commentButton{
+    font-size: 12px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.StCommentsInputContent{
+    flex-grow: 2;
+}
+.commentsButtonBox{
+    margin-left: 5px;
+}
+.commentsButtonBox:hover .commentsIcon{
     color: #f44408;
 }
