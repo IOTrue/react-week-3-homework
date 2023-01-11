@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
-
+import { isDev, serverUrl } from ".";
 
 
 const initialState = {
@@ -13,7 +13,7 @@ export const __addComments = createAsyncThunk( //추가
   "todos/ADD_COMMENTS",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.post('http://localhost:3001/comments', payload)
+      const {data} = await axios.post(`${serverUrl}/comments`, payload)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)
@@ -25,7 +25,7 @@ export const __getComments = createAsyncThunk( //가져오기
   "todos/GET_COMMENTS",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.get('http://localhost:3001/comments')
+      const {data} = await axios.get(`${serverUrl}/comments`)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)
@@ -37,7 +37,7 @@ export const __deleteComments = createAsyncThunk( //삭제
   "todos/DELETE_COMMENTS",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.delete(`http://localhost:3001/comments/${payload}`)
+      const {data} = await axios.delete(`${serverUrl}/comments/${payload}`)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)

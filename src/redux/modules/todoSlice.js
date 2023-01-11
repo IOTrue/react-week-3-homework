@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
+import { isDev, serverUrl } from ".";
 
 
 const initialState = {
@@ -13,7 +14,7 @@ export const __getTodoDetail = createAsyncThunk( //투두 상세 get
   "todos/GET_TODO_DETAIL",
   async (payload, thunkAPI) => {
     try{
-      const {data} = await axios.get(`http://localhost:3001/todos/${payload}`)
+      const {data} = await axios.get(`${serverUrl}/todos/${payload}`)
       return thunkAPI.fulfillWithValue(data)
     }catch(error){
       return thunkAPI.rejectWithValue(error)
@@ -25,7 +26,7 @@ export const __updateTodoDetail = createAsyncThunk( //투두 상세 수정
   "todos/UPDATE_TODO_DETAIL",
   async (payload, thunkAPI) => {
     try{
-      await axios.patch(`http://localhost:3001/todos/${payload.id}`, payload)
+      await axios.patch(`${serverUrl}/todos/${payload.id}`, payload)
       return thunkAPI.fulfillWithValue(payload)
     }catch(error){
       return thunkAPI.rejectWithValue(error)
