@@ -1,71 +1,49 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React , {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { BsFillTrashFill } from "react-icons/bs";
 import ButtonDefault from '../components/ButtonDefault';
-
-
-
+import { __getTodos, __deleteTodos } from '../redux/modules/todosSlice';
 
 function TodoList() {
 
-  const todos = useSelector((state)=>state.todosSlice.todos)
-  console.log('투두 리스트 : ' , todos)
+  const dispatch = useDispatch()
 
-  const TodoItem = ()=> {
-    
+  const { isLoading, error, todos } = useSelector((state) => state.todos);
+  useEffect(()=>{
+    dispatch(__getTodos())
+  }, [dispatch])
+
+  const onClickTodoDeleteHandler = async (todoId)=> {
+    dispatch(__deleteTodos(todoId))
+  }
+  const TodoItem = ({todoId, todoAuth, todoTitle})=> {
+    return( 
+      <StTodoItem> 
+        <Link to={`/todoListDetail/${todoId}`} className="linkTodoItem">
+          <StTodoListItemDiv>
+            <StTodoTitleSpan>{todoTitle}</StTodoTitleSpan>
+            <StTodoAuthSpan>작성자 : {todoAuth}</StTodoAuthSpan>
+          </StTodoListItemDiv>
+        </Link>
+        <ButtonDefault onClick={()=>onClickTodoDeleteHandler(todoId)}
+          hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
+      </StTodoItem>
+    )
   }
 
   return (
     <StTodoListBox>
       <StH2>2023 Todo List</StH2>
       <StTodoUl>
-        <StTodoItem> 
-          <Link to="/todoListDetail/1" className="linkTodoItem">
-            <StTodoListItemDiv>
-              <StTodoTitleSpan>제목</StTodoTitleSpan>
-              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-            </StTodoListItemDiv>
-            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-          </Link>
-        </StTodoItem>
-        <StTodoItem> 
-          <Link to="/todoListDetail/1" className="linkTodoItem">
-            <StTodoListItemDiv>
-              <StTodoTitleSpan>제목</StTodoTitleSpan>
-              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-            </StTodoListItemDiv>
-            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-          </Link>
-        </StTodoItem>
-        <StTodoItem> 
-          <Link to="/todoListDetail/1" className="linkTodoItem">
-            <StTodoListItemDiv>
-              <StTodoTitleSpan>제목</StTodoTitleSpan>
-              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-            </StTodoListItemDiv>
-            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-          </Link>
-        </StTodoItem>
-        <StTodoItem> 
-          <Link to="/todoListDetail/1" className="linkTodoItem">
-            <StTodoListItemDiv>
-              <StTodoTitleSpan>제목</StTodoTitleSpan>
-              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-            </StTodoListItemDiv>
-            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-          </Link>
-        </StTodoItem>
-        <StTodoItem> 
-          <Link to="/todoListDetail/1" className="linkTodoItem">
-            <StTodoListItemDiv>
-              <StTodoTitleSpan>제목</StTodoTitleSpan>
-              <StTodoAuthSpan>작성자 : 작성자1</StTodoAuthSpan>
-            </StTodoListItemDiv>
-            <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="buttonListTrash"><BsFillTrashFill className="iconListTrash"/></ButtonDefault>
-          </Link>
-        </StTodoItem>
+        {isLoading && <div>로딩 중</div>}
+        {error && <div>error</div>}
+        {todos?.map((todo)=>{
+          return(
+            <TodoItem key={todo.id} todoId={todo.id} todoAuth={todo.auth} todoTitle={todo.title} />
+          )
+        })}
       </StTodoUl>
     </StTodoListBox>
   )

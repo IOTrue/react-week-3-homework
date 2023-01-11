@@ -1,30 +1,48 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import ButtonDefault from '../components/ButtonDefault';
 import useInput from '../hooks/useInput';
-import { useNavigate } from 'react-router-dom';
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import {addTodoList} from '../redux/modules/todosSlice'
+import { __addTodos } from '../redux/modules/todosSlice';
 
 
 function TodoWrite() {
     const dispatch = useDispatch()
+
+    let id = Date.now()
+
     const [auth, onChangeAuthHandler] = useInput('')
     const [title, onChangeTitleHandler] = useInput('')
     const [content, onChangeContentHandler] = useInput('')
 
+    const [authMessage, setAuthMessage] = useState('5글자 이내로 입력하세요.')
+    const [titleMessage, setTitleMessage] = useState('50글자 이내로 입력하세요.')
+    const [contentMessage, setContentMessage] = useState('200글자 이내로 입력하세요.')
+
+    const onBlurAuthMessage = ()=>{
+        auth.length > 5 ? setAuthMessage('5글자 이내로 입력하세요.') : setAuthMessage('올바른 입력 형식입니다.')
+    }
+    const onBlurTitleMessage = ()=>{
+        title.length > 50 ? setTitleMessage('50글자 이내로 입력하세요.') : setTitleMessage('올바른 입력 형식입니다.')
+    }
+    const onBlurContentMessage = ()=>{
+        content.length > 200 ? setContentMessage('200글자 이내로 입력하세요.') : setContentMessage('올바른 입력 형식입니다.')
+    }
     const navigate = useNavigate()
     const onSubmitTodoHandler = (e)=>{
         e.preventDefault()
         const newTodoItem = {
+            id,
             auth,
             title,
             content
         }
-        dispatch(addTodoList(newTodoItem))
+        dispatch(__addTodos(newTodoItem))
+        navigate('/todoList')
     }
-   
+
     const onClickNavigateHome = ()=>{
         navigate('/')
     }
@@ -32,12 +50,15 @@ function TodoWrite() {
   return (
     <StPositionBox>
         <StTodoWriteBox onSubmit={onSubmitTodoHandler}>
-            <StLabelInput for="todoInputAuth">작성자</StLabelInput>
-            <StTodoInput onChange={onChangeAuthHandler} value={auth} type="text" id="todoInputAuth" placeholder="이름을 입력하세요 (5자 이내)" required></StTodoInput>
-            <StLabelInput for="todoInputTitle">제목</StLabelInput>
-            <StTodoInput onChange={onChangeTitleHandler} value={title} type="text" id="todoInputTitle" placeholder="제목을 입력하세요 (50자 이내)" required></StTodoInput>
-            <StLabelInput for="todoInputContent">내용</StLabelInput>
-            <StTodoTextarea onChange={onChangeContentHandler} value={content} id="todoInputContent" placeholder="내용을 입력하세요 (200자 이내)" required></StTodoTextarea>
+            <StLabelInput htmlfor="todoInputAuth">작성자</StLabelInput>
+            <StTodoInput onChange={onChangeAuthHandler} onBlur={onBlurAuthMessage} value={auth} type="text" id="todoInputAuth" placeholder="이름을 입력하세요 (5자 이내)" maxLength="5" autoFocus required></StTodoInput>
+            <span>{authMessage}</span>
+            <StLabelInput htmlfor="todoInputTitle">제목</StLabelInput>
+            <StTodoInput onChange={onChangeTitleHandler} onBlur={onBlurTitleMessage} value={title} type="text" id="todoInputTitle" placeholder="제목을 입력하세요 (50자 이내)" maxLength="50" required></StTodoInput>
+            <span>{titleMessage}</span>
+            <StLabelInput htmlfor="todoInputContent">내용</StLabelInput>
+            <StTodoTextarea onChange={onChangeContentHandler} onBlur={onBlurContentMessage} value={content} id="todoInputContent" placeholder="내용을 입력하세요 (200자 이내)" maxLength="200" required></StTodoTextarea>
+            {<span>{contentMessage}</span>}
             <StDivCenter>
                 <ButtonDefault padding="12px 80px"
                 bgColor="#fa9370" hoverColor="#f44408" hoverFontColor="#fff"
