@@ -37,7 +37,7 @@ function TodoList() {
     <StTodoListBox>
       <StH2>2023 Todo List</StH2>
       <StTodoUl>
-        {isLoading && <div>로딩 중</div>}
+        {isLoading && <div>투두 리스트를 불러오는 중입니다.</div>}
         {error && <div>error</div>}
         {todos?.map((todo)=>{
           return(
