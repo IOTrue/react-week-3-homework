@@ -38,10 +38,9 @@ function Comments() {
     useEffect(()=>{
         dispatch(__getComments(paramId))
     },[dispatch])    
-    
   return (
     <StCommnetsBoxWrap className={`commentBoxWrap ${commentActive ? 'boxOff' : 'boxOn'}`}>
-        <ButtonDefault onClick={onClickCommentBoxToggle} fontDefaultColor="#fff" bgColor="seagreen" className="commentButton" padding="12px 40px" hoverColor="#ffac40" hoverFontColor="#fff">댓글 {commentActive ? '열기' : '닫기'}</ButtonDefault>
+        <ButtonDefault onClick={onClickCommentBoxToggle} fontDefaultColor="#fff" bgColor="seagreen" className="commentButton" padding="12px 40px" hoverColor="#ffac40" hoverFontColor="#fff">댓글 {commentActive ? '열기' : '닫기'} ({comments.length})</ButtonDefault>
         <StCommentsBox>
             <StCommentsForm onSubmit={onSubmitAddCommentHandler}>
                 <StCommentsInput onChange={onChangeCommentAuth} value={commentAuth} placeholder="이름(5자 이내)" maxLength="5" required />
