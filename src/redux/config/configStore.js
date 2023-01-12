@@ -8,7 +8,7 @@ import comment from '../modules/comment';
 
 const store = configureStore({
   reducer: { todos, todo, comment },
-  devTools: false,
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;
