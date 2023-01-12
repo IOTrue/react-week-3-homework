@@ -6,7 +6,8 @@ import { serverUrl } from ".";
 const initialState = {
   comments:[],
   isLoading: false,
-  error: null
+  error: null,
+  isDisabledToggle : false
 };
 
 export const __addComments = createAsyncThunk( //추가
@@ -45,10 +46,28 @@ export const __deleteComments = createAsyncThunk( //삭제
   }
 );
 
+export const __updateComments = createAsyncThunk( //업데이트
+  "todos/UPDATE_COMMENTS",
+  async (payload, thunkAPI) => {
+    try{
+      axios.patch(`${serverUrl}/comments/${payload.id}`, payload)
+      return thunkAPI.fulfillWithValue(payload)
+    }catch(error){
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+);
+
+
+
 const commentsSlice = createSlice({
   name: "comments",
   initialState,
-  reducers: {},
+  reducers: {
+    isGlobalDisabledToggle : (state, action)=>{
+      state.isDisabledToggle = action.payload
+    }
+  },
   extraReducers: {
     //추가
     [__addComments.pending]: (state) => {
@@ -86,10 +105,25 @@ const commentsSlice = createSlice({
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
+    //업데이트
+    [__updateComments.pending]: (state) => {
+      state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+    },
+    [__updateComments.fulfilled]: (state, action) => {
+      state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
+      const target = state.comments.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      state.comments.splice(target, 1, action.payload);
+    },
+    [__updateComments.rejected]: (state, action) => {
+      state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
+      state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+    },
   },
 });
 
 // 액션크리에이터는 컴포넌트에서 사용하기 위해 export 하고
-export const { } = commentsSlice.actions;
+export const {isGlobalDisabledToggle} = commentsSlice.actions;
 // reducer 는 configStore에 등록하기 위해 export default 합니다.
 export default commentsSlice.reducer;

@@ -3,10 +3,9 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import ButtonDefault from './ButtonDefault';
-import { FaPencilAlt } from "react-icons/fa";
-import { BsFillTrashFill } from "react-icons/bs";
 import { __addComments, __getComments, __deleteComments } from '../redux/modules/comment';
 import useInput from '../hooks/useInput';
+import CommentItem from './Comment'
 
 function Comments() {
     const dispatch = useDispatch()
@@ -39,27 +38,7 @@ function Comments() {
     useEffect(()=>{
         dispatch(__getComments(paramId))
     },[dispatch])    
-
-    const onClickDeleteComment = async (commentId)=>{
-        dispatch(__deleteComments(commentId))
-    }
-
-    const CommentItem=({commentId, commentAuth, commentContent})=>{
-        return(
-            <StCommentsItem>
-                <StCommentsItemInfo>
-                    <StCommentsAuth>{commentAuth}</StCommentsAuth>
-                    <StCommentsContent>{commentContent}</StCommentsContent>
-                </StCommentsItemInfo>
-                <StCommentsEditButtonBox>
-                    <ButtonDefault hoverColor="#fff" borderRadius="10px" padding="10px" className="commentsButtonBox"><FaPencilAlt className="iconListTrash commentsIcon"/></ButtonDefault>
-                    <ButtonDefault onClick={()=>onClickDeleteComment(commentId)}
-                    hoverColor="#fff" borderRadius="10px" padding="10px" className="commentsButtonBox"><BsFillTrashFill className="iconListTrash commentsIcon"/></ButtonDefault>
-                </StCommentsEditButtonBox>
-            </StCommentsItem>
-        )
-    }
-
+    
   return (
     <StCommnetsBoxWrap className={`commentBoxWrap ${commentActive ? 'boxOff' : 'boxOn'}`}>
         <ButtonDefault onClick={onClickCommentBoxToggle} fontDefaultColor="#fff" bgColor="seagreen" className="commentButton" padding="12px 40px" hoverColor="#ffac40" hoverFontColor="#fff">댓글 {commentActive ? '열기' : '닫기'}</ButtonDefault>
@@ -75,7 +54,8 @@ function Comments() {
                         <CommentItem key={comment.id}
                         commentAuth={comment.commentAuth}
                         commentContent={comment.commentContent}
-                        commentId={comment.id}>
+                        commentId={comment.id}
+                        paramId={paramId}>
                         </CommentItem>
                     )
                 })}
@@ -85,22 +65,6 @@ function Comments() {
   )
 }
 
-const StCommentsEditButtonBox = styled.div`
-    display: flex;
-`
-
-const StCommentsContent = styled.span`
-    font-weight: bold;
-`
-
-const StCommentsAuth = styled.span`
-    display: block;
-    margin-bottom: 10px;
-    font-size: 12px;
-`
-const StCommentsItemInfo = styled.div`
-    width: 90%;
-`
 
 const StCommentsList = styled.div`
     height: calc(100% - 70px);
@@ -120,17 +84,6 @@ const StCommentsList = styled.div`
         border-radius: 10px;
     }
 
-`
-const StCommentsItem = styled.div`
-    display: flex;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #d2d2d2;
-    justify-content: space-between;
-    flex-grow: 2 1;
-    :hover{
-        background-color: #ffe7d3;
-    }
 `
 const StCommentsInput = styled.input`
     border: 1px solid #a1a1a1;

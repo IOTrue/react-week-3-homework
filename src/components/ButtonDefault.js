@@ -6,9 +6,9 @@ import '../main.css'
 function ButtonDefault(props) {
     const {children, bgColor, hoverColor, hoverFontColor,
         padding, margin, className, borderRadius, fontDefaultColor,
-        onClick} = props
+        onClick, disabled} = props
   return (
-    <StButtonDefault onClick={onClick} fontDefaultColor={fontDefaultColor} className={className||null} borderRadius={borderRadius} padding={padding} margin={margin} bgColor={bgColor} hoverColor={hoverColor} hoverFontColor={hoverFontColor}>{children}</StButtonDefault>
+    <StButtonDefault disabled={disabled} onClick={onClick} fontDefaultColor={fontDefaultColor} className={className||null} borderRadius={borderRadius} padding={padding} margin={margin} bgColor={bgColor} hoverColor={hoverColor} hoverFontColor={hoverFontColor}>{children}</StButtonDefault>
   )
 }
 

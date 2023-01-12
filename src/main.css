@@ -4,6 +4,20 @@
 .p-relative{
     position: relative;
 }
+button:disabled{
+    cursor:default;
+    background-color: #d2d2d2;
+    color: #fff;
+    border: none;
+}
+button:disabled:hover{
+    background-color: #d2d2d2;
+    color: #fff;
+    border: none;
+}
+button:disabled:hover svg[class^='icon']{
+    color: #ffac40;
+}
 .linkTodoItem{
     display: block;
     height: 100%;
@@ -108,4 +122,8 @@
 }
 .commentsButtonBox:hover .commentsIcon{
     color: #f44408;
+}
+
+.commentEditCancle, .commentEditSave{
+    width: 50px;
 }
