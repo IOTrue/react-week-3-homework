@@ -53,6 +53,7 @@ function TodoList() {
 const StTodoListItemDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `
 const StTodoListBox = styled.div`
   padding: 70px 40px;
@@ -61,6 +62,7 @@ const StTodoListBox = styled.div`
 const StTodoTitleSpan = styled.span`
   font-weight: bold;
   display: block;
+  width: 100%;
 `
 const StTodoAuthSpan = styled.span`
   display: block;
