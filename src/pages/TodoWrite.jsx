@@ -22,13 +22,13 @@ function TodoWrite() {
     const [contentMessage, setContentMessage] = useState('200글자 이내로 입력하세요.')
 
     const onBlurAuthMessage = ()=>{
-        auth.length > 5 ? setAuthMessage('5글자 이내로 입력하세요.') : setAuthMessage('올바른 입력 형식입니다.')
+        auth.trim().length > 5 || auth.trim() === "" ? setAuthMessage('5글자 이내로 입력하세요.') : setAuthMessage('올바른 입력 형식입니다.')
     }
     const onBlurTitleMessage = ()=>{
-        title.length > 50 ? setTitleMessage('50글자 이내로 입력하세요.') : setTitleMessage('올바른 입력 형식입니다.')
+        title.trim().length > 50 || title.trim() === "" ? setTitleMessage('50글자 이내로 입력하세요.') : setTitleMessage('올바른 입력 형식입니다.')
     }
     const onBlurContentMessage = ()=>{
-        content.length > 200 ? setContentMessage('200글자 이내로 입력하세요.') : setContentMessage('올바른 입력 형식입니다.')
+        content.trim().length > 200 || content.trim() === "" ? setContentMessage('200글자 이내로 입력하세요.') : setContentMessage('올바른 입력 형식입니다.')
     }
     const navigate = useNavigate()
     const onSubmitTodoHandler = (e)=>{
