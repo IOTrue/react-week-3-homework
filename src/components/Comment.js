@@ -91,6 +91,7 @@ const StCommentsItem = styled.div`
 `
 const StCommentsEditButtonBox = styled.div`
     display: flex;
+    align-items: center;
 `
 
 const StCommentsContent = styled.span`
