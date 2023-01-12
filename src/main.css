@@ -120,6 +120,8 @@ button:disabled:hover svg[class^='icon']{
 }
 .commentsButtonBox{
     margin-left: 5px;
+    width: 40px;
+    height: 40px;
 }
 .commentsButtonBox:hover .commentsIcon{
     color: #f44408;
